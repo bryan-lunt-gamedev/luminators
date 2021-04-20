@@ -1,6 +1,4 @@
 import random
-from abc import ABC
-
 
 class LuminationStateMachine(object):
     """
@@ -88,3 +86,21 @@ class LuminationSM_level5(LuminationStateMachine):
     
     def transform(self):
         self.increment_helper([0,1,2,3])
+
+def lumination_factory(level_choice):
+    L = None
+    if 1 == level_choice:
+        L = LuminationSM_level1()
+    elif 2 == level_choice:
+        L = LuminationSM_level2()
+    elif 3 == level_choice:
+        L = LuminationSM_level3()
+    elif 4 == level_choice:
+        L = LuminationSM_level4()
+    elif 5 == level_choice:
+        L = LuminationSM_level5()
+    else:
+        print("Invalid level choice")
+        return None
+    return L
+    
