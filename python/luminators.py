@@ -78,7 +78,10 @@ class LuminationSM_level4(LuminationStateMachine):
         super().__init__(7, 4,queue_depth=3, up=3)
     
     def transform(self):
-        self.decrement_helper([0,1,2])
+        for i in range(self.n_states):
+            if i != self.queue[0]:#decrement all but the up corner.
+                self.state[i] -= 1
+                self.state[i] %= self.n_states
 
 class LuminationSM_level5(LuminationStateMachine):
     def __init__(self):
