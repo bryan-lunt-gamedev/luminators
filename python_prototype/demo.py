@@ -1,20 +1,20 @@
 from luminators import *
 
-def poll_side(min,max_exclusive):
+def poll_integer(prompt, min,max_exclusive):
     side = -1
     while not (min <= side < max_exclusive):
-        side_str = input("side? (0..{}) : ".format(max_exclusive-1))
+        side_str = input("{}? ({}..{}) : ".format(prompt,min,max_exclusive-1))
         try:
             side = int(side_str)
         except:
-            print("Must input an integer (0..{})".format(max_exclusive-1))
+            print("Must input an integer ({}..{})".format(min,max_exclusive-1))
     return side
 
 def gameloop(L):
     print("S={} : Q={} ".format(L.state,L.queue))
     while True:
         
-        side = poll_side(0,L.n_corners)
+        side = poll_integer("side", 0,L.n_corners)
         
         L.input(side)
         print("S={} : Q={} ".format(L.state,L.queue))
@@ -25,8 +25,8 @@ def gameloop(L):
     return True
     
 def dogame():
-    level_choice = int(input("level (1-5)? : "))
-    assert 1 <= level_choice <= 5, "Must choose an integer level, 1 through 5, inclusive."
+    level_choice = poll_integer("level",1,6)
+    
     
     if 1 == level_choice:
         L = LuminationSM_level1()
