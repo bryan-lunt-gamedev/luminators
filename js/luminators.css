@@ -1,0 +1,12 @@
+.luminator-start-level {
+  font-size: large;
+}
+
+table.luminator-game {
+  table-layout:fixed;
+  font-size: xx-large;
+}
+
+td:focus {
+  background-color: blue;
+}

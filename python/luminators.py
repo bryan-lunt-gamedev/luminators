@@ -34,12 +34,12 @@ class LuminationStateMachine(object):
         
         return self.check_win()
     
-    def increment_helper(self,queue_positions=[0]):
+    def decrement_helper(self,queue_positions=[0]):
         for i in queue_positions:
             if i >= len(self.queue):
                 continue
             p = self.queue[i]
-            self.state[p] += 1
+            self.state[p] -= 1
             self.state[p] %= self.n_states
     
     def transform(self):
@@ -55,14 +55,14 @@ class LuminationSM_level1(LuminationStateMachine):
         super().__init__(5, 4,queue_depth=1, up=0)
     
     def transform(self):
-        self.increment_helper([0])
+        self.decrement_helper([0])
 
 class LuminationSM_level2(LuminationStateMachine):
     def __init__(self):
         super().__init__(5, 4,queue_depth=2, up=1)
     
     def transform(self):
-        self.increment_helper([0,1])
+        self.decrement_helper([0,1])
 
 class LuminationSM_level3(LuminationStateMachine):
     def __init__(self):
@@ -71,21 +71,21 @@ class LuminationSM_level3(LuminationStateMachine):
     def transform(self):
         up = self.queue[0]
         if up not in self.queue[1:3]:
-            self.increment_helper([1])
+            self.decrement_helper([1])
 
 class LuminationSM_level4(LuminationStateMachine):
     def __init__(self):
         super().__init__(7, 4,queue_depth=3, up=3)
     
     def transform(self):
-        self.increment_helper([0,1,2])
+        self.decrement_helper([0,1,2])
 
 class LuminationSM_level5(LuminationStateMachine):
     def __init__(self):
         super().__init__(9, 4,queue_depth=4, up=3)
     
     def transform(self):
-        self.increment_helper([0,1,2,3])
+        self.decrement_helper([0,1,2,3])
 
 def lumination_factory(level_choice):
     L = None

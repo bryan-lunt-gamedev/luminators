@@ -1,0 +1,97 @@
+<html>
+<head>
+    <link rel="stylesheet" href="luminators.css">
+</head>
+<body>
+
+
+<div class="luminator-gamestart">
+    <div> Click on a number to start a new game at that level.
+    <div>
+    <span class="luminator-start-level" id="start1" data-level="1">1</span>
+    <span class="luminator-start-level" id="start2" data-level="2">2</span>
+    <span class="luminator-start-level" id="start3" data-level="3">3</span>
+    <span class="luminator-start-level" id="start4" data-level="4">4</span>
+    <span class="luminator-start-level" id="start5" data-level="5">5</span>
+    </div>
+</div>
+
+<div>
+    Click on one of the corners below to input.
+    Cannot click the same corner twice in a row.
+    <p> The goal is to get every number to 0. </p>
+</div>
+
+<table class="luminator-game">
+<tbody>
+  <tr>
+    <td class="tg-0lax"><div class="luminator-dummy" > </div></th>
+    <td class="tg-0lax"> <div class="luminator-corner" id="corner0" data-corner="0">0</div> </th>
+    <td class="tg-0lax"><div class="luminator-dummy" > </div></th>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><div class="luminator-corner" id="corner1" data-corner="1">1</div> </td>
+    <td class="tg-0lax"><div class="luminator-dummy" > </div></td>
+    <td class="tg-0lax"><div class="luminator-corner" id="corner2" data-corner="2">2</div> </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><div class="luminator-dummy" > </div></td>
+    <td class="tg-0lax"><div class="luminator-corner" id="corner3" data-corner="3">3</div> </td>
+    <td class="tg-0lax"><div class="luminator-dummy" > </div></td>
+  </tr>
+</tbody>
+</table>
+
+<!---
+<div class="luminators-gamestate">
+    <p>Internal State: <span>show/hide</span></p>
+    <div class="luminators-gamestate-state" id="gamestate"></div>
+    <div class="luminators-gamestate-queue" id="gamequeue"></div>
+</div>
+--->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="module">
+    import * as luminators from "./transpiled/luminators.js";
+    
+    //Create a luminators object and attach it.
+    var L = luminators.lumination_factory(1);
+    
+    function updateUI(){
+        $("#corner0").text(L.state[0]);
+        $("#corner1").text(L.state[1]);
+        $("#corner2").text(L.state[2]);
+        $("#corner3").text(L.state[3]);
+    }
+    
+    $( document ).ready(function() {
+        updateUI();
+        console.log( "ready!" );
+        
+        $( ".luminator-gamestart" ).on("click", ".luminator-start-level", function() {
+            var which_level = parseInt($(this).data("level"));
+            L = luminators.lumination_factory(which_level);
+            updateUI();
+            
+        });
+        
+        
+        $( document ).on("click", ".luminator-corner", function() {
+            var which_corner = parseInt($(this).data("corner"));
+            L.input(which_corner);
+            updateUI();
+            $(this).focus();
+        });
+        
+        $( document ).click( function() {
+            if( L.check_win() ){
+                alert("You win!");
+            }
+        });
+    
+    });
+</script>
+
+</body>
+</html>

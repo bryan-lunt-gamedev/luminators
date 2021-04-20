@@ -1,4 +1,4 @@
-// Transcrypt'ed from Python, 2021-04-20 09:27:20
+// Transcrypt'ed from Python, 2021-04-20 11:14:34
 var random = {};
 import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __proxy__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
 import * as __module_random__ from './random.js';
@@ -57,7 +57,7 @@ export var LuminationStateMachine =  __class__ ('LuminationStateMachine', [objec
 		self.transform ();
 		return self.check_win ();
 	});},
-	get increment_helper () {return __get__ (this, function (self, queue_positions) {
+	get decrement_helper () {return __get__ (this, function (self, queue_positions) {
 		if (typeof queue_positions == 'undefined' || (queue_positions != null && queue_positions.hasOwnProperty ("__kwargtrans__"))) {;
 			var queue_positions = [0];
 		};
@@ -66,7 +66,7 @@ export var LuminationStateMachine =  __class__ ('LuminationStateMachine', [objec
 				continue;
 			}
 			var p = self.queue [i];
-			self.state [p]++;
+			self.state [p]--;
 			self.state [p] = __mod__ (self.state [p], self.n_states);
 		}
 	});},
@@ -85,7 +85,7 @@ export var LuminationSM_level1 =  __class__ ('LuminationSM_level1', [LuminationS
 		__super__ (LuminationSM_level1, '__init__') (self, 5, 4, __kwargtrans__ ({queue_depth: 1, up: 0}));
 	});},
 	get transform () {return __get__ (this, function (self) {
-		self.increment_helper ([0]);
+		self.decrement_helper ([0]);
 	});}
 });
 export var LuminationSM_level2 =  __class__ ('LuminationSM_level2', [LuminationStateMachine], {
@@ -94,7 +94,7 @@ export var LuminationSM_level2 =  __class__ ('LuminationSM_level2', [LuminationS
 		__super__ (LuminationSM_level2, '__init__') (self, 5, 4, __kwargtrans__ ({queue_depth: 2, up: 1}));
 	});},
 	get transform () {return __get__ (this, function (self) {
-		self.increment_helper ([0, 1]);
+		self.decrement_helper ([0, 1]);
 	});}
 });
 export var LuminationSM_level3 =  __class__ ('LuminationSM_level3', [LuminationStateMachine], {
@@ -105,7 +105,7 @@ export var LuminationSM_level3 =  __class__ ('LuminationSM_level3', [LuminationS
 	get transform () {return __get__ (this, function (self) {
 		var up = self.queue [0];
 		if (!__in__ (up, self.queue.__getslice__ (1, 3, 1))) {
-			self.increment_helper ([1]);
+			self.decrement_helper ([1]);
 		}
 	});}
 });
@@ -115,7 +115,7 @@ export var LuminationSM_level4 =  __class__ ('LuminationSM_level4', [LuminationS
 		__super__ (LuminationSM_level4, '__init__') (self, 7, 4, __kwargtrans__ ({queue_depth: 3, up: 3}));
 	});},
 	get transform () {return __get__ (this, function (self) {
-		self.increment_helper ([0, 1, 2]);
+		self.decrement_helper ([0, 1, 2]);
 	});}
 });
 export var LuminationSM_level5 =  __class__ ('LuminationSM_level5', [LuminationStateMachine], {
@@ -124,7 +124,7 @@ export var LuminationSM_level5 =  __class__ ('LuminationSM_level5', [LuminationS
 		__super__ (LuminationSM_level5, '__init__') (self, 9, 4, __kwargtrans__ ({queue_depth: 4, up: 3}));
 	});},
 	get transform () {return __get__ (this, function (self) {
-		self.increment_helper ([0, 1, 2, 3]);
+		self.decrement_helper ([0, 1, 2, 3]);
 	});}
 });
 export var lumination_factory = function (level_choice) {
