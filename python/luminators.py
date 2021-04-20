@@ -71,7 +71,7 @@ class LuminationSM_level3(LuminationStateMachine):
     def transform(self):
         up = self.queue[0]
         if up not in self.queue[1:3]:
-            self.decrement_helper([1])
+            self.decrement_helper([0])
 
 class LuminationSM_level4(LuminationStateMachine):
     def __init__(self):
