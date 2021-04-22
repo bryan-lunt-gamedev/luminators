@@ -4,7 +4,10 @@
 
 table.luminator-game {
   table-layout:fixed;
-  font-size: xx-large;
+  font-size: 15vw;
+  width: 80%;
+  height: 80%;
+  margin: auto;
 }
 
 td:focus {
